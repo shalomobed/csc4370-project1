@@ -1,0 +1,655 @@
+/* ==========================================================================
+   ArtsZone — Creative Arts & Maker Community Hub
+   Visual language: black/white minimal, bold uppercase type, black CTAs,
+   matches the ArtsZone Figma wireframe.
+   ========================================================================== */
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+}
+
+/* --------------------------------------------------------------------------
+   Theme system (CSS-only, :checked driven, zero JavaScript)
+   Default "Mono" theme matches the wireframe's black/white palette;
+   Terracotta and Slate are selectable alternates.
+   -------------------------------------------------------------------------- */
+.site-wrapper {
+    --bg: #ffffff;
+    --surface: #f2f2f2;
+    --surface-strong: #e2e2e2;
+    --text: #111111;
+    --muted: #6e6e6e;
+    --accent: #111111;
+    --accent-contrast: #ffffff;
+    --border: #e2e2e2;
+    --ink: #000000;
+    display: block;
+    min-height: 100vh;
+}
+
+#theme-warm:checked ~ .site-wrapper {
+    --bg: #fdf3ec;
+    --surface: #f5e4d6;
+    --surface-strong: #ecd3bd;
+    --text: #3a2a1f;
+    --muted: #83695a;
+    --accent: #c1652c;
+    --accent-contrast: #ffffff;
+    --border: #f0ded0;
+}
+
+#theme-cool:checked ~ .site-wrapper {
+    --bg: #f3f6f8;
+    --surface: #e4edf1;
+    --surface-strong: #d3e2e8;
+    --text: #1f2a30;
+    --muted: #5c6b73;
+    --accent: #2f6f8f;
+    --accent-contrast: #ffffff;
+    --border: #dbe4e8;
+}
+
+.theme-switcher-inputs,
+.nav-toggle-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.theme-switcher {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-left: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--border);
+}
+
+.theme-switcher label {
+    display: inline-block;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--border);
+    transition: transform 0.15s ease;
+}
+
+.theme-switcher label:hover { transform: scale(1.15); }
+
+label[for="theme-studio"] { background: #111111; }
+label[for="theme-warm"] { background: #c1652c; }
+label[for="theme-cool"] { background: #2f6f8f; }
+
+#theme-studio:checked ~ .site-wrapper .theme-switcher label[for="theme-studio"],
+#theme-warm:checked ~ .site-wrapper .theme-switcher label[for="theme-warm"],
+#theme-cool:checked ~ .site-wrapper .theme-switcher label[for="theme-cool"] {
+    border-color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   Layout shell
+   -------------------------------------------------------------------------- */
+a { color: var(--text); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--text);
+}
+
+.brand:hover { text-decoration: none; }
+
+.brand-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-flex;
+}
+.brand-icon svg { width: 100%; height: 100%; color: var(--text); }
+
+.brand-name {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+}
+
+.main-nav a.active { font-weight: 700; border-bottom: 2px solid var(--accent); }
+
+.nav-toggle-btn {
+    display: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+    color: var(--text);
+}
+.nav-toggle-btn svg { width: 100%; height: 100%; }
+
+main { display: block; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+    background: #141414;
+    color: #cfcfcf;
+    margin-top: 3.5rem;
+    padding: 2.5rem 0;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-brand .brand { color: #ffffff; }
+.footer-brand .brand-icon svg { color: #ffffff; }
+.footer-tagline { margin: 0.6rem 0 0; font-size: 0.8rem; color: #9c9c9c; }
+
+.footer-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.footer-nav li { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+.footer-nav a { color: #cfcfcf; }
+.footer-nav a:hover { color: #ffffff; }
+.footer-dot { font-size: 0.4rem; color: #6e6e6e; }
+
+/* --------------------------------------------------------------------------
+   Hero — full-bleed photo with dark overlay + centered headline
+   -------------------------------------------------------------------------- */
+.hero {
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    background: #2b2b2b;
+    background-size: cover;
+    background-position: center 30%;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 15, 0.45);
+}
+
+.hero-inner {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1.5rem;
+}
+
+.hero h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    line-height: 1.3;
+}
+
+.hero .hashtag {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    margin-top: 0.4rem;
+}
+
+.hero-dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.hero-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.45);
+}
+.hero-dots span.is-active { background: #ffffff; }
+
+/* --------------------------------------------------------------------------
+   Section headers
+   -------------------------------------------------------------------------- */
+.section { padding: 2.75rem 0; }
+
+.section-head { margin-bottom: 1.5rem; }
+
+.section-head h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.3rem;
+    text-transform: uppercase;
+}
+
+.section-head p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+}
+
+/* --------------------------------------------------------------------------
+   Card grid (Featured Artists / Upcoming Workshops)
+   -------------------------------------------------------------------------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.tile-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.tile-card .thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--surface-strong);
+    display: block;
+}
+
+.tile-card .tile-body {
+    padding-top: 0.7rem;
+}
+
+.tile-card h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.tile-card .meta {
+    margin: 0.1rem 0 0.5rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.tile-card .card-bio {
+    margin: 0 0 0.75rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.tile-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: var(--ink);
+    color: #ffffff;
+    border: none;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+}
+.tile-btn:hover { text-decoration: none; opacity: 0.85; }
+
+/* --------------------------------------------------------------------------
+   Discipline filter ($_GET['type'])
+   -------------------------------------------------------------------------- */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+}
+
+.filter-bar a {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.85rem;
+    background: var(--bg);
+    border-radius: 999px;
+}
+
+.filter-bar a.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+}
+
+.filter-bar a:hover { text-decoration: none; border-color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   Client Reviews
+   -------------------------------------------------------------------------- */
+.reviews-banner {
+    background: #111111;
+    color: #ffffff;
+    text-align: center;
+    padding: 1.4rem 1rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    background-image:
+        repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 40px);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.review-card {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+}
+
+.review-avatar {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: var(--surface-strong);
+    flex-shrink: 0;
+}
+
+.review-name-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.review-name { font-weight: 700; font-size: 0.9rem; }
+.review-stars { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.05em; }
+.review-text { margin: 0.15rem 0 0; font-size: 0.85rem; color: var(--muted); }
+
+/* --------------------------------------------------------------------------
+   Member profile
+   -------------------------------------------------------------------------- */
+.profile-header {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-header img {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+
+.profile-header .profile-info { flex: 1; min-width: 240px; }
+.profile-header h1 { margin: 0 0 0.4rem; font-size: 1.5rem; }
+.profile-header p.bio { color: var(--muted); max-width: 60ch; }
+
+/* --------------------------------------------------------------------------
+   CSS Grid masonry gallery + :target lightbox (no JavaScript)
+   -------------------------------------------------------------------------- */
+.masonry {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-auto-rows: 8px;
+    grid-auto-flow: dense;
+    gap: 1.25rem;
+}
+
+.masonry-item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    /* grid-row-end span is set inline per item, computed in PHP from the
+       project image's real width/height so taller images take more rows —
+       this is what produces the masonry effect via CSS Grid, no JS. */
+}
+
+.masonry-item img { width: 100%; height: 100%; display: block; object-fit: cover; background: var(--surface-strong); }
+
+.masonry-item .caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.65));
+    color: #fff;
+    padding: 0.6rem 0.75rem 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.lightbox:target { display: flex; }
+
+.lightbox-content {
+    background: var(--bg);
+    max-width: 700px;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.lightbox-content img { width: 100%; display: block; max-height: 70vh; object-fit: contain; background: #000; }
+
+.lightbox-caption { padding: 1rem; font-weight: 700; }
+
+.lightbox-close {
+    display: inline-block;
+    margin: 1rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+.lightbox-close:hover { text-decoration: none; opacity: 0.85; }
+
+/* --------------------------------------------------------------------------
+   Workshops (full listing page)
+   -------------------------------------------------------------------------- */
+.workshop-list-detailed { display: flex; flex-direction: column; gap: 1rem; }
+
+.workshop-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.workshop-date-badge {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.6rem 1rem;
+    text-align: center;
+    min-width: 90px;
+    font-weight: 700;
+}
+.workshop-date-badge small { display: block; font-weight: 400; color: var(--muted); font-size: 0.7rem; }
+
+.workshop-row .details { flex: 1; min-width: 200px; }
+.workshop-row h3 { margin: 0 0 0.25rem; }
+.workshop-row .host { color: var(--muted); font-size: 0.85rem; margin: 0 0 0.4rem; }
+
+/* --------------------------------------------------------------------------
+   Commission form
+   -------------------------------------------------------------------------- */
+.form-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.form-group { margin-bottom: 1.2rem; }
+
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--border);
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: var(--surface);
+    color: var(--text);
+}
+
+.form-group textarea { min-height: 120px; resize: vertical; }
+
+.error-text { color: #b23b3b; font-size: 0.82rem; margin-top: 0.3rem; }
+
+.confirmation { text-align: center; padding: 2rem; }
+.confirmation h2 { text-transform: none; }
+
+.btn {
+    display: inline-block;
+    background: var(--ink);
+    color: #ffffff;
+    padding: 0.7rem 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
+    border: none;
+    cursor: pointer;
+}
+.btn:hover { text-decoration: none; opacity: 0.85; }
+
+/* --------------------------------------------------------------------------
+   Responsive breakpoints
+   -------------------------------------------------------------------------- */
+
+/* Tablet: 768px – 1199px — masonry's auto-fill grid adapts on its own */
+
+/* Mobile: 767px and below */
+@media (max-width: 767px) {
+
+    .nav-toggle-btn { display: block; }
+
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 1rem 1.5rem 1.5rem;
+    }
+
+    .main-nav ul { flex-direction: column; gap: 1rem; }
+    .theme-switcher { margin: 1.25rem 0 0; padding: 1rem 0 0; border-left: none; border-top: 1px solid var(--border); }
+
+    .nav-toggle-input:checked ~ .site-wrapper .main-nav { display: flex; }
+
+    .hero { min-height: 260px; }
+    .hero h1 { font-size: 1.4rem; }
+    .hero .hashtag { font-size: 1.2rem; }
+
+    .card-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .reviews-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+    .profile-header { flex-direction: column; text-align: center; }
+    .profile-header p.bio { max-width: none; }
+    .workshop-row { flex-direction: column; align-items: flex-start; }
+    .form-card { padding: 1.25rem; }
+
+    .footer-grid { flex-direction: column; }
+}
