@@ -3,27 +3,27 @@ require __DIR__ . '/includes/helpers.php';
 require __DIR__ . '/data/members.php';
 require __DIR__ . '/data/events.php';
 
-// Sort events by date ascending so "upcoming" really means soonest-first.
+// Sort events by date ascending 
 usort($events, fn($a, $b) => strtotime($a['date']) <=> strtotime($b['date']));
-$upcomingEvents = array_slice($events, 0, 3);
+$OurEvents = array_slice($events, 0, 3);
 
 // Feature a handful of members on the home page.
-$featuredMembers = array_slice($members, 0, 3);
+$featuredCreatives = array_slice($members, 0, 4);
 
 // Static testimonial content for the Client Reviews section.
 $reviews = [
-    ['name' => 'Customer A', 'text' => 'Highly recommended!'],
-    ['name' => 'Customer B', 'text' => 'Highly recommended!'],
-    ['name' => 'Customer D', 'text' => 'Highly recommended!'],
+    ['name' => 'Mia (Model)', 'text' => 'My first time modelling but quite literally the best experience ever!'],
+    ['name' => 'Eric (Brand Owner - Blessed Brand', 'text' => 'So happy with the results of the show. Got to showcase my upcoming collection and work with Christ Centered Creatives'],
+    ['name' => 'Suzi (Model)', 'text' => 'Modeled with Bunkie before so it was so fun seeing her in the stylist and creative direction role!'],
 ];
 
-$pageTitle = 'ArtsZone — Where Artists Can Share Their Work';
+$pageTitle = 'Tell The World — Creative Community';
 include __DIR__ . '/includes/header.php';
 ?>
 
-<section class="hero" style="background-image:url('https://picsum.photos/id/1027/1600/700');">
+<section class="hero" style="background-image:url('Media/Show_BTS_3.jpg');">
     <div class="hero-inner">
-        <h1>Where Artists Can Share Their Work!<span class="hashtag">#ARTSZONE</span></h1>
+        <h1>Where Faith and Creativity Meet<span class="hashtag">#Matt28:19</span></h1>
     </div>
     <div class="hero-dots" aria-hidden="true">
         <span class="is-active"></span><span></span><span></span>
@@ -32,11 +32,11 @@ include __DIR__ . '/includes/header.php';
 
 <section class="section container">
     <div class="section-head">
-        <h2>Featured Artists</h2>
-        <p>Check out our featured Artists.</p>
+        <h2>Featured Creatives</h2>
+        <p>Check out brands, models, and so much more</p>
     </div>
-    <div class="card-grid">
-        <?php foreach ($featuredMembers as $m): ?>
+    <div class="card-grid featured-grid">
+        <?php foreach ($featuredCreatives as $m): ?>
             <?php include __DIR__ . '/includes/member-card.php'; ?>
         <?php endforeach; ?>
     </div>
@@ -47,10 +47,14 @@ include __DIR__ . '/includes/header.php';
         <h2>Upcoming Workshops</h2>
         <p>Check out our upcoming workshops.</p>
     </div>
-    <div class="card-grid">
-        <?php foreach ($upcomingEvents as $e): ?>
+        <div class="card-grid">
+        <?php foreach ($OurEvents as $e): ?>
             <article class="tile-card">
-                <img class="thumb" src="https://picsum.photos/seed/<?= urlencode($e['title']) ?>/400/300" alt="<?= htmlspecialchars($e['title']) ?>">
+                <div class="event-slider">
+                    <?php foreach ($e['images'] as $img): ?>
+                        <img class="thumb" src="Media/<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($e['title']) ?>">
+                    <?php endforeach; ?>
+                </div>
                 <div class="tile-body">
                     <h3><?= htmlspecialchars($e['title']) ?></h3>
                     <p class="meta"><?= date('F j, Y', strtotime($e['date'])) ?></p>
