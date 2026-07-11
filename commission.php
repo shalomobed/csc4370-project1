@@ -4,6 +4,7 @@ require __DIR__ . '/data/members.php';
 
 $disciplines = array_values(array_unique(array_column($members, 'discipline')));
 sort($disciplines);
+$disciplines[] = 'Other'; // display-only, not stored back into $members data
 
 $errors = [];
 $submitted = false;
@@ -12,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name    = trim($_POST['name'] ?? '');
     $email   = trim($_POST['email'] ?? '');
     $type    = trim($_POST['discipline'] ?? '');
+    $typeOther = trim($_POST['discipline_other'] ?? '');
     $message = trim($_POST['message'] ?? '');
 
     if ($name === '') {
@@ -22,17 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     if ($type === '') {
         $errors['discipline'] = 'Please choose a discipline.';
-    }
+    } elseif ($type === 'Other' && $typeOther === '') {
+        $errors['discipline_other'] = 'Please tell us your discipline.';
+    }   
+    
     if ($message === '') {
         $errors['message'] = 'Please describe what you have in mind.';
     }
 
     if (empty($errors)) {
-        // Sanitize before storing/displaying.
+        $finalDiscipline = ($type === 'Other') ? $typeOther : $type;
+
         $_SESSION['inquiry'] = [
             'name'       => htmlspecialchars($name, ENT_QUOTES, 'UTF-8'),
             'email'      => htmlspecialchars($email, ENT_QUOTES, 'UTF-8'),
-            'discipline' => htmlspecialchars($type, ENT_QUOTES, 'UTF-8'),
+            'discipline' => htmlspecialchars($finalDiscipline, ENT_QUOTES, 'UTF-8'),
             'message'    => htmlspecialchars($message, ENT_QUOTES, 'UTF-8'),
             'submitted_at' => date('F j, Y g:i a'),
         ];
@@ -99,6 +105,13 @@ include __DIR__ . '/includes/header.php';
                     <?php endforeach; ?>
                 </select>
                 <?php if (isset($errors['discipline'])): ?><p class="error-text"><?= $errors['discipline'] ?></p><?php endif; ?>
+            </div>
+
+            <div class="form-group other-discipline-group">
+                <label for="discipline_other">If Other, please specify</label>
+                <input type="text" id="discipline_other" name="discipline_other"
+                       value="<?= htmlspecialchars($_POST['discipline_other'] ?? '') ?>">
+                <?php if (isset($errors['discipline_other'])): ?><p class="error-text"><?= $errors['discipline_other'] ?></p><?php endif; ?>
             </div>
 
             <div class="form-group">
