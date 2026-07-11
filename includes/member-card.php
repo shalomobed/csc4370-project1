@@ -7,7 +7,7 @@
  */
 ?>
 <article class="tile-card">
-    <img class="thumb" src="https://picsum.photos/seed/artist<?= $m['id'] ?>/400/300" alt="<?= htmlspecialchars($m['name']) ?>">
+    <img class="thumb" src="<?= htmlspecialchars($m['image']) ?>" alt="<?= htmlspecialchars($m['name']) ?>">
     <div class="tile-body">
         <h3><?= htmlspecialchars($m['name']) ?></h3>
         <p class="meta"><?= htmlspecialchars($m['discipline']) ?></p>

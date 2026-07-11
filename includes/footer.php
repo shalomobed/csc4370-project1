@@ -10,14 +10,14 @@
                         <path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                     </svg>
                 </span>
-                <span class="brand-name">ARTSZONE</span>
+                <span class="brand-name">Tell The World</span>
             </a>
-            <p class="footer-tagline">&copy; <?= date('Y') ?> ArtsZone</p>
+            <p class="footer-tagline">&copy; <?= date('Y') ?> Tell The World</p>
         </div>
 
         <ul class="footer-nav">
             <li><span class="footer-dot" aria-hidden="true">&#9679;</span><a href="gallery.php">Members</a></li>
-            <li><span class="footer-dot" aria-hidden="true">&#9679;</span><a href="member.php?member=1">Member Profile</a></li>
+            <li><span class="footer-dot" aria-hidden="true">&#9679;</span><a href="member.php?member=<?= $featuredMemberId ?>">Member Profile</a></li>
             <li><span class="footer-dot" aria-hidden="true">&#9679;</span><a href="workshops.php">Workshops</a></li>
             <li><span class="footer-dot" aria-hidden="true">&#9679;</span><a href="commission.php">Commission Form</a></li>
         </ul>

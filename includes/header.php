@@ -1,7 +1,10 @@
 <?php
 // Expects $pageTitle to be set by the including page.
-$pageTitle = $pageTitle ?? 'ArtsZone — Creative Arts & Maker Community Hub';
+$pageTitle = $pageTitle ?? 'Tell The World — Creative Community';
 $currentPage = basename($_SERVER['SCRIPT_NAME']);
+
+require_once __DIR__ . '/../data/members.php';
+$featuredMemberId = $members[0]['id'] ?? 1;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +35,13 @@ $currentPage = basename($_SERVER['SCRIPT_NAME']);
                     <path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                 </svg>
             </span>
-            <span class="brand-name">ARTSZONE</span>
+            <span class="brand-name">Tell The World</span>
         </a>
 
         <nav class="main-nav">
             <ul>
                 <li><a href="gallery.php" class="<?= $currentPage === 'gallery.php' ? 'active' : '' ?>">Members</a></li>
-                <li><a href="member.php?member=1" class="<?= $currentPage === 'member.php' ? 'active' : '' ?>">Member Profile</a></li>
+                <li><a href="member.php?member=<?= $featuredMemberId ?>" class="...">Member Profile</a></li>
                 <li><a href="workshops.php" class="<?= $currentPage === 'workshops.php' ? 'active' : '' ?>">Workshops</a></li>
                 <li><a href="commission.php" class="<?= $currentPage === 'commission.php' ? 'active' : '' ?>">Commission Form</a></li>
             </ul>
