@@ -49,7 +49,7 @@ if (isset($_GET['sent']) && isset($_SESSION['inquiry'])) {
 
 $prefillArtist = isset($_GET['artist']) ? trim($_GET['artist']) : '';
 
-$pageTitle = 'Commission Form — ArtsZone';
+$pageTitle = 'Commission Form — Tell The World';
 include __DIR__ . '/includes/header.php';
 ?>
 
