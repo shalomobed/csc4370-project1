@@ -35,22 +35,14 @@ include __DIR__ . '/includes/header.php';
     <!-- CSS Grid masonry gallery: row-span per item is computed in PHP from
          the project's real image dimensions, so taller images span more
          rows automatically. Pure CSS Grid, no JavaScript. -->
-    <?php
-    $rowHeight = 8;   // matches grid-auto-rows in css/style.css
-    $rowGap = 20;     // matches gap in css/style.css (1.25rem)
-    $assumedColWidth = 300; // typical rendered column width for the span estimate
-    ?>
+
     <div class="masonry">
-        <?php foreach ($member['projects'] as $i => $p): ?>
-            <?php
-            $displayedHeight = ($p['h'] / $p['w']) * $assumedColWidth;
-            $rowSpan = (int) ceil(($displayedHeight + $rowGap) / ($rowHeight + $rowGap));
-            ?>
-            <a href="#project-<?= $id ?>-<?= $i ?>" class="masonry-item" style="grid-row-end: span <?= $rowSpan ?>;">
-                <img src="<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['title']) ?>">
-                <span class="caption"><?= htmlspecialchars($p['title']) ?></span>
-            </a>
-        <?php endforeach; ?>
+    <?php foreach ($member['projects'] as $i => $p): ?>
+        <a href="#project-<?= $id ?>-<?= $i ?>" class="masonry-item">
+            <img src="<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['title']) ?>">
+            <span class="caption"><?= htmlspecialchars($p['title']) ?></span>
+        </a>
+    <?php endforeach; ?>
     </div>
 
     <?php foreach ($member['projects'] as $i => $p): ?>

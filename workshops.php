@@ -3,7 +3,7 @@ require __DIR__ . '/data/events.php';
 
 usort($events, fn($a, $b) => strtotime($a['date']) <=> strtotime($b['date']));
 
-$pageTitle = 'Workshops — ArtsZone';
+$pageTitle = 'Workshops — Tell The World';
 include __DIR__ . '/includes/header.php';
 ?>
 
