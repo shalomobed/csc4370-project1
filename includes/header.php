@@ -41,7 +41,7 @@ $featuredMemberId = $members[0]['id'] ?? 1;
         <nav class="main-nav">
             <ul>
                 <li><a href="gallery.php" class="<?= $currentPage === 'gallery.php' ? 'active' : '' ?>">Members</a></li>
-                <li><a href="member.php?member=<?= $featuredMemberId ?>" class="...">Member Profile</a></li>
+                <li><a href="member.php?member=<?= $featuredMemberId ?>" class="<?= $currentPage === 'member.php' ? 'active' : '' ?>">Member Profile</a></li>
                 <li><a href="workshops.php" class="<?= $currentPage === 'workshops.php' ? 'active' : '' ?>">Workshops</a></li>
                 <li><a href="commission.php" class="<?= $currentPage === 'commission.php' ? 'active' : '' ?>">Commission Form</a></li>
             </ul>
