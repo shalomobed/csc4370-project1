@@ -637,6 +637,15 @@ main { display: block; }
 
 .form-group textarea { min-height: 120px; resize: vertical; }
 
+/* Hide the "Other" text field by default... */
+.other-discipline-group { display: none; }
+
+/* ...and reveal it only when the Other <option> is the selected one.
+   :has() needs a modern browser (2023+); no JS fallback exists here. */
+.form-card:has(#discipline option[value="Other"]:checked) .other-discipline-group {
+    display: block;
+}
+
 .error-text { color: #b23b3b; font-size: 0.82rem; margin-top: 0.3rem; }
 
 .confirmation { text-align: center; padding: 2rem; }
