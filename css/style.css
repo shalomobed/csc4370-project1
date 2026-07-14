@@ -33,6 +33,14 @@ html, body {
     min-height: 100vh;
 }
 
+.back-link {
+    color: #000000;
+}
+
+.form-group label {
+    color: var(--text);
+}
+
 #theme-warm:checked ~ .site-wrapper {
     --bg: #fdf3ec;
     --surface: #f5e4d6;
@@ -69,6 +77,8 @@ html, body {
     --border: #2e2e2e;
     --ink: #2e2e2e;
 }
+
+
 
 .theme-switcher-inputs,
 .nav-toggle-input {
