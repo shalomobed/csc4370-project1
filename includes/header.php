@@ -20,6 +20,7 @@ $featuredMemberId = $members[0]['id'] ?? 1;
 <input type="radio" name="theme" id="theme-studio" class="theme-switcher-inputs" checked>
 <input type="radio" name="theme" id="theme-warm" class="theme-switcher-inputs">
 <input type="radio" name="theme" id="theme-cool" class="theme-switcher-inputs">
+<input type="radio" name="theme" id="theme-dark" class="theme-switcher-inputs">
 
 <!-- CSS-only mobile nav toggle -->
 <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
@@ -49,6 +50,7 @@ $featuredMemberId = $members[0]['id'] ?? 1;
                 <label for="theme-studio" title="Mono theme"></label>
                 <label for="theme-warm" title="Terracotta theme"></label>
                 <label for="theme-cool" title="Slate theme"></label>
+                <label for="theme-dark" title="Dark theme"></label>
             </div>
         </nav>
 
