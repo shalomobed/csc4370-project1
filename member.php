@@ -16,7 +16,7 @@ include __DIR__ . '/includes/header.php';
 
 <section class="section container">
 
-    <p><a href="gallery.php">&larr; Back to Members</a></p>
+    <p><a href="gallery.php" class="back-link">&larr; Back to Members</a></p>
 
     <div class="profile-header">
         <img src="<?= htmlspecialchars($member['image']) ?>" alt="<?= htmlspecialchars($member['name']) ?>">
